@@ -36,7 +36,7 @@ The current tests that will be triggered by PR:
 Because we check for black formatting, it is recommend to run black before commit in the code:
 
 ```bash
-black . gsplat/ tests/ examples/
+black . gsplat2d/ tests/ examples/
 ```
 
 Since there is no GPU supported on github workflow container, we don't test against those cuda unit tests under `tests/` in PR. So it is recommended to check test pass locally before committing:
@@ -102,7 +102,7 @@ sudo apt install bear
 #
 # This will save a file at 3dgs-exercise/compile_commands.json, which clangd
 # should be able to detect.
-bear -- pip install -e gsplat/
+bear -- pip install -e gsplat2d/
 
 # Make sure the file is not empty!
 cat compile_commands.json

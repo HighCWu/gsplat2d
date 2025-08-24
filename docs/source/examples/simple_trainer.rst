@@ -1,7 +1,7 @@
 Simple Trainer
 ===================================
 
-.. currentmodule:: gsplat
+.. currentmodule:: gsplat2d
 
 Training on an image
 -----------------------------------

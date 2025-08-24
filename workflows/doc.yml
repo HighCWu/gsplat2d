@@ -35,5 +35,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _build/
           force_orphan: true
-          cname: docs.gsplat.studio
+          cname: docs.gsplat2d.studio
         if: github.event_name != 'pull_request'

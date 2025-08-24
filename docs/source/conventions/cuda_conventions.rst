@@ -35,7 +35,7 @@ Kernel functions that depend on the rendered output image size are organized int
     const dim3 gridDim = {(img_width + NUM_THREADS_X - 1) / NUM_THREADS_X, (img_height + NUM_THREADS_Y - 1) / NUM_THREADS_Y, 1};
 
 where each individual block within the grid contains a layout of threads defined by ``const dim3 blockDim = {NUM_THREADS_X, NUM_THREADS_Y, 1};``.
-An example of a kernel function that requires two dimensional grids is the main :func:`gsplat.rasterize_gaussians` kernel that renders an arbitrary number of pixels in an output image.
+An example of a kernel function that requires two dimensional grids is the main :func:`gsplat2d.rasterize_gaussians` kernel that renders an arbitrary number of pixels in an output image.
 
 
 Config Constants

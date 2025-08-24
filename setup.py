@@ -7,7 +7,7 @@ import sys
 from setuptools import find_packages, setup
 
 __version__ = None
-exec(open("gsplat/version.py", "r").read())
+exec(open("gsplat2d/version.py", "r").read())
 
 URL = "https://github.com/nerfstudio-project/gsplat"  # TODO
 
@@ -27,7 +27,7 @@ def get_extensions():
     from torch.__config__ import parallel_info
     from torch.utils.cpp_extension import CUDAExtension
 
-    extensions_dir = osp.join("gsplat", "cuda", "csrc")
+    extensions_dir = osp.join("gsplat2d", "cuda", "csrc")
     sources = glob.glob(osp.join(extensions_dir, "*.cu")) + glob.glob(
         osp.join(extensions_dir, "*.cpp")
     )
@@ -45,7 +45,7 @@ def get_extensions():
     define_macros = []
 
     if sys.platform == "win32":
-        define_macros += [("gsplat_EXPORTS", None)]
+        define_macros += [("gsplat2d_EXPORTS", None)]
 
     extra_compile_args = {"cxx": ["-O3"]}
     if not os.name == "nt":  # Not on Windows:
@@ -88,7 +88,7 @@ def get_extensions():
         extra_compile_args["nvcc"] += ["-DWIN32_LEAN_AND_MEAN"]
 
     extension = CUDAExtension(
-        f"gsplat.csrc",
+        f"gsplat2d.csrc",
         sources,
         include_dirs=[osp.join(extensions_dir, "third_party", "glm")],
         define_macros=define_macros,
@@ -101,12 +101,12 @@ def get_extensions():
 
 
 setup(
-    name="gsplat",
+    name="gsplat2d",
     version=__version__,
     description=" Python package for differentiable rasterization of gaussians",
     keywords="gaussian, splatting, cuda",
     url=URL,
-    download_url=f"{URL}/archive/gsplat-{__version__}.tar.gz",
+    download_url=f"{URL}/archive/gsplat2d-{__version__}.tar.gz",
     python_requires=">=3.7",
     install_requires=[
         "jaxtyping",
@@ -115,7 +115,7 @@ setup(
         "typing_extensions; python_version<'3.8'",
     ],
     extras_require={
-        # dev dependencies. Install them by `pip install gsplat[dev]`
+        # dev dependencies. Install them by `pip install gsplat2d[dev]`
         "dev": [
             "black[jupyter]==22.3.0",
             "isort==5.10.1",

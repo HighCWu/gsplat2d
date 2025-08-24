@@ -33,7 +33,7 @@ def cuda_toolkit_version():
     return cuda_version
 
 
-name = "gsplat_cuda"
+name = "gsplat2d_cuda"
 build_dir = _get_build_directory(name, verbose=False)
 extra_include_paths = [os.path.join(PATH, "csrc/third_party/glm")]
 extra_cflags = ["-O3"]
@@ -53,7 +53,7 @@ sources = list(glob.glob(os.path.join(PATH, "csrc/*.cu"))) + list(
 
 try:
     # try to import the compiled module (via setup.py)
-    from gsplat import csrc as _C
+    from gsplat2d import csrc as _C
 except ImportError:
     # if failed, try with JIT compilation
     if cuda_toolkit_available():
@@ -64,8 +64,8 @@ except ImportError:
         except OSError:
             pass
 
-        if os.path.exists(os.path.join(build_dir, "gsplat_cuda.so")) or os.path.exists(
-            os.path.join(build_dir, "gsplat_cuda.lib")
+        if os.path.exists(os.path.join(build_dir, "gsplat2d_cuda.so")) or os.path.exists(
+            os.path.join(build_dir, "gsplat2d_cuda.lib")
         ):
             # If the build exists, we assume the extension has been built
             # and we can load it.
@@ -82,7 +82,7 @@ except ImportError:
             # if the build directory exists with a lock file in it.
             shutil.rmtree(build_dir)
             with Console().status(
-                "[bold yellow]gsplat: Setting up CUDA (This may take a few minutes the first time)",
+                "[bold yellow]gsplat2d: Setting up CUDA (This may take a few minutes the first time)",
                 spinner="bouncingBall",
             ):
                 _C = load(
@@ -94,7 +94,7 @@ except ImportError:
                 )
     else:
         Console().print(
-            "[yellow]gsplat: No CUDA toolkit found. gsplat will be disabled.[/yellow]"
+            "[yellow]gsplat2d: No CUDA toolkit found. gsplat2d will be disabled.[/yellow]"
         )
 
 
