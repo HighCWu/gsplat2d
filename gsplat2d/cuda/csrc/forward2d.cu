@@ -34,8 +34,8 @@ __global__ void project_gaussians_2d_forward_kernel(
     // float clamped_x = max(-1.0f, min(1.0f, means2d[idx].x)); // Clamp x between -1 and 1
     // float clamped_y = max(-1.0f, min(1.0f, means2d[idx].y)); // Clamp y between -1 and 1
 
-    float2 center = {0.5f * img_size.x * means2d[idx].x + 0.5f * img_size.x,
-                     0.5f * img_size.y * means2d[idx].y + 0.5f * img_size.y};
+    float2 center = {(0.5f * means2d[idx].x + 0.5f) * (img_size.x - 1),
+                     (0.5f * means2d[idx].y + 0.5f) * (img_size.y - 1)};
     // Assuming L is packed row-wise in a 1D array: [l11, l21, l22]
     float l11 = L_elements[idx].x; // scale_x
     float l21 = L_elements[idx].y; // covariance_xy
@@ -90,8 +90,8 @@ __global__ void project_gaussians_2d_scale_rot_forward_kernel(
     num_tiles_hit[idx] = 0;
 
     // Retrieve the 2D Gaussian parameters
-    float2 center = {0.5f * img_size.x * means2d[idx].x + 0.5f * img_size.x,
-                     0.5f * img_size.y * means2d[idx].y + 0.5f * img_size.y};
+    float2 center = {(0.5f * means2d[idx].x + 0.5f) * (img_size.x - 1),
+                     (0.5f * means2d[idx].y + 0.5f) * (img_size.y - 1)};
 
     glm::mat2 R = rotmat2d(rotation[idx]);
     glm::mat2 S = scale_to_mat2d(scales2d[idx]);

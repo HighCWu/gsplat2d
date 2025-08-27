@@ -45,8 +45,8 @@ __global__ void project_gaussians_2d_backward_kernel(
     v_L_elements[idx].y = grad_l_21;
     v_L_elements[idx].z = grad_l_22;
 
-    v_mean2d[idx].x = v_xy[idx].x * (0.5f * img_size.x);
-    v_mean2d[idx].y = v_xy[idx].y * (0.5f * img_size.y);
+    v_mean2d[idx].x = v_xy[idx].x * (0.5f * (img_size.x - 1));
+    v_mean2d[idx].y = v_xy[idx].y * (0.5f * (img_size.y - 1));
 
 }
 
@@ -104,7 +104,7 @@ __global__ void project_gaussians_2d_scale_rot_backward_kernel(
     v_scale[idx].y = G_11 * sigma_y_g[0][0] + 2 * G_12 * sigma_y_g[0][1] + G_22 * sigma_y_g[1][1];
     v_rot[idx] = G_11 * theta_g[0][0] + 2 * G_12 * theta_g[0][1] + G_22 * theta_g[1][1];
 
-    v_mean2d[idx].x = v_xy[idx].x * (0.5f * img_size.x);
-    v_mean2d[idx].y = v_xy[idx].y * (0.5f * img_size.y);
+    v_mean2d[idx].x = v_xy[idx].x * (0.5f * (img_size.x - 1));
+    v_mean2d[idx].y = v_xy[idx].y * (0.5f * (img_size.y - 1));
 
 }
